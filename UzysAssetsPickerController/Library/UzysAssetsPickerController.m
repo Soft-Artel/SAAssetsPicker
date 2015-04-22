@@ -101,6 +101,19 @@
     
 }
 
+-(void) viewDidAppear:(BOOL)animated{
+    
+    
+    if( self.openCameraAtStart ){
+        
+        [self btnAction: self.btnCamera ];
+        self.openCameraAtStart = NO;
+        
+    }
+    
+}
+
+
 - (void)initVariable
 {
 //    self.assetsFilter = [ALAssetsFilter allPhotos];

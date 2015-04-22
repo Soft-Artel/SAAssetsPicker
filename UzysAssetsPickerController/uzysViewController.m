@@ -97,8 +97,9 @@
     }
     else if([sender isEqual:self.btnVideo])
     {
-        picker.maximumNumberOfSelectionVideo = 2;
-        picker.maximumNumberOfSelectionPhoto = 0;
+        picker.maximumNumberOfSelectionVideo = 0;
+        picker.maximumNumberOfSelectionPhoto = 3;
+        picker.openCameraAtStart = YES;
     }
     else if([sender isEqual:self.btnImageOrVideo])
     {
