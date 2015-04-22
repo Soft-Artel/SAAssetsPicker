@@ -68,6 +68,16 @@ static CGFloat thumnailLength;
 }
 - (void)applyData:(ALAsset *)asset
 {
+    if( asset == nil){
+        
+        self.asset  = nil;
+        self.image  = [UIImage imageNamed:@"uzysAP_ico_upload_camera"];
+        self.type   =  ALAssetTypePhoto;
+        self.title  = @"+";
+
+        return;
+    }
+    
     self.asset  = asset;
     self.image  = [UIImage imageWithCGImage:asset.thumbnail];
     self.type   = [asset valueForProperty:ALAssetPropertyType];

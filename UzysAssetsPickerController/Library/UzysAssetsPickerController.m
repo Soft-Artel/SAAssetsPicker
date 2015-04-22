@@ -158,6 +158,8 @@
     self.btnDone.clipsToBounds = YES;
     [self.btnDone setBackgroundColor:appearanceConfig.finishSelectionButtonColor];
     
+    [self.btnDone setTitle:@"Добавить вложения" forState:UIControlStateNormal];
+    
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0.5)];
     lineView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.15f];
     [self.bottomView addSubview:lineView];
@@ -425,13 +427,13 @@
 - (void)reloadData
 {
     [self.collectionView reloadData];
-    [self.btnDone setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)self.collectionView.indexPathsForSelectedItems
+    [self.btnDone setTitle:[NSString stringWithFormat:@"Добавить вложения: %lu",(unsigned long)self.collectionView.indexPathsForSelectedItems
                             .count] forState:UIControlStateNormal];
     [self showNoAssetsIfNeeded];
 }
 - (void)setAssetsCountWithSelectedIndexPaths:(NSArray *)indexPaths
 {
-    [self.btnDone setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)indexPaths.count] forState:UIControlStateNormal];
+    [self.btnDone setTitle:[NSString stringWithFormat:@"Добавить вложения: %lu",(unsigned long)indexPaths.count] forState:UIControlStateNormal];
 }
 
 #pragma mark - Asset Exception View
@@ -599,7 +601,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.assets.count;
+    return self.assets.count + 1 ;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -608,7 +610,13 @@
     
     UzysAssetsViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    [cell applyData:[self.assets objectAtIndex:indexPath.row]];
+    if( indexPath.row > 0 ){
+        [cell applyData:[self.assets objectAtIndex:indexPath.row - 1]];
+    }
+    else{
+        [cell applyData:nil];
+    }
+        
     
     return cell;
 }
